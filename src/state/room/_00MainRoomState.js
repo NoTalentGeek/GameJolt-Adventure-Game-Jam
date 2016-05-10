@@ -21,6 +21,7 @@ var _00MainRoomState = {
     },
     update:function(){
 
+        //TESTING CODE.
         _Game.camera.y += 10;
 
     },

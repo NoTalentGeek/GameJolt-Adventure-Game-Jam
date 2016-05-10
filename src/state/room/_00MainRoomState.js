@@ -3,19 +3,10 @@ var _00MainRoomState = {
     create:function(){
 
         console.log("_00MainRoomState.js.");
-        _Game.physics.arcade.gravity.y = 1200;
 
-        //_Game.camera.height = 144;
-        //_Game.camera.width = 256;
-        //_Game.camera.x = 200;
-        //_Game.camera.y = 1024;
-        //Phaser.Camera.x = 10;
-        //Phaser.Camera.y = 10;
-        _Game.world.resize(1024, 576);
-        console.log(_Game.camera.height);
-        console.log(_Game.camera.width);
-        console.log(_Game.camera.x);
-        console.log(_Game.camera.y);
+        _Game.camera.scale.x = 4;
+        _Game.camera.scale.y = 4;
+        _Game.physics.arcade.gravity.y = 1200;
 
         this._Tilemap = _Game.add.tilemap("_00MainRoomPath_Tilemap");
         this._Tilemap.addTilesetImage("Prototype32X32MainCharacter", "Prototype32X32MainCharacter_Image");
@@ -31,7 +22,10 @@ var _00MainRoomState = {
     },
     update:function(){
 
-        _Game.camera.y += 10; console.log(_Game.camera.y);
+        //_Game.camera.y = 576 - 144;
+        _Game.camera.y += 1;
+        ControlMainCameraBound_Void();
+        console.log(_Game.camera.y);
 
     },
     CreateSprite_Void:function(

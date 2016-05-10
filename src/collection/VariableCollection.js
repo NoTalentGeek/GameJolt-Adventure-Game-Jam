@@ -2,9 +2,9 @@
 var keyboard_Cursors;
 
 var _00MainRoomPath_String = "asset/prototype/prototype map/_00MainRoom.json";
-var _Prototype32X32MainCharacterPath_String = "asset/prototype/prototype image/Prototype32X32MainCharacter.png";
-var _Prototype96X96BoulderPath_String = "asset/prototype/prototype image/Prototype96X96Boulder.png";
-var _Prototype96X96MainTilePath_String = "asset/prototype/prototype image/Prototype96X96MainTile.png";
+var _Prototype64X64MainCharacterPath_String = "asset/prototype/prototype image/Prototype64X64MainCharacter.png";
+var _Prototype192X192BoulderPath_String = "asset/prototype/prototype image/Prototype192X192Boulder.png";
+var _Prototype192X192MainTilePath_String = "asset/prototype/prototype image/Prototype192X192MainTile.png";
 var screenHeight_Int = 576;
 var screenWidth_Int = 1024;
 var screenScaleX_Int = 4;

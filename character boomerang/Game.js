@@ -7,10 +7,13 @@ var keyboardLeft_KeyCode;
 var keyboardRight_KeyCode;
 var keyboardSword_KeyCode;
 
-var boomerangCounterMax_Int = 20;
 var boomerangCounterMaxLevel1_Int = 20;
-var boomerangCounterMaxLevel2_Int = 30;
-var boomerangSpeed_Int = 500;
+var boomerangCounterMaxLevel2_Int = 25;
+var boomerangLevel_Int = 1;
+var boomerangLevelMax_Int = 3;
+var boomerangVelocityLevel1_Int = 500;
+var boomerangVelocityLevel2_Int = 700;
+var boomerangVelocityLevel3_Int = 1000;
 var mainCharacterVelocity_Int = 150;
 var Prototype32X32Boomerang_Path_String = "asset/prototype/prototype image/Prototype32X32Boomerang.png";
 var Prototype32X32MainTile_Path_String = "asset/prototype/prototype image/Prototype32X32MainTile.png";
@@ -31,10 +34,14 @@ var Boomerang_Object = function(_velocity_Int){
     this._Sprite.smoothed = false;
     this.counter_Int = 0;
     this.level_Int = 1;
+    this.mainCharacterFacingRight_Bool = _MainCharacter_Object.facingRight_Bool;
     this.return_Bool = false;
     this.velocity_Int = _velocity_Int;
-    this.mainCharacterFacingRight_Bool
-        = _MainCharacter_Object.facingRight_Bool;
+
+    //Fix the boomerang level properties.
+    if(boomerangLevel_Int == 1){ this.boomerangCounterMax_Int = boomerangCounterMaxLevel1_Int; }
+    else if(boomerangLevel_Int == 2){ this.boomerangCounterMax_Int = boomerangCounterMaxLevel2_Int; }
+    else if(boomerangLevel_Int == 3){ this.boomerangCounterMax_Int = 30; }
 
     //Fix the boomerang spawn point.
     if(this.mainCharacterFacingRight_Bool == true)
@@ -51,7 +58,7 @@ Boomerang_Object.prototype.Update_Void = function(){
     this._Sprite.anchor.y = 0.5;
     this._Sprite.rotation += 0.5;
 
-    if(this.counter_Int < boomerangCounterMax_Int){
+    if(this.counter_Int < this.boomerangCounterMax_Int){
 
         this.counter_Int ++;
         this.return_Bool = false;
@@ -62,7 +69,7 @@ Boomerang_Object.prototype.Update_Void = function(){
             { this._Sprite.body.velocity.x = this.velocity_Int; }
 
     }
-    else if(this.counter_Int >= boomerangCounterMax_Int)
+    else if(this.counter_Int >= this.boomerangCounterMax_Int)
         { this.return_Bool = true; }
 
     if(this.return_Bool == true){
@@ -164,10 +171,16 @@ MainCharacter_Object.prototype.FireBoomerang_Object = function(){
 
         if(keyboard_Input.isDown(keyboardBoomerang_KeyCode)){
 
-            if(this.facingRight_Bool == true)
-                { new Boomerang_Object(boomerangSpeed_Int); }
-            else if(this.facingRight_Bool == false)
-                { new Boomerang_Object(-1*boomerangSpeed_Int); }
+            if(this.facingRight_Bool == true){
+                if(boomerangLevel_Int == 1){ new Boomerang_Object(boomerangVelocityLevel1_Int); }
+                else if(boomerangLevel_Int == 2){ new Boomerang_Object(boomerangVelocityLevel2_Int); }
+                else if(boomerangLevel_Int == 3){ new Boomerang_Object(boomerangVelocityLevel3_Int); }
+            }
+            else if(this.facingRight_Bool == false){
+                if(boomerangLevel_Int == 1){ new Boomerang_Object(-1*boomerangVelocityLevel1_Int); }
+                else if(boomerangLevel_Int == 2){ new Boomerang_Object(-1*boomerangVelocityLevel2_Int); }
+                else if(boomerangLevel_Int == 3){ new Boomerang_Object(-1*boomerangVelocityLevel3_Int); }
+            }
             this.boomerangOut_Bool = true;
 
         }
@@ -220,6 +233,16 @@ var Main_State = {
         _MainCharacter_Object.Update_Void();
         for(var i_Int = 0; i_Int < boomerang_Group.length; i_Int ++)
             { boomerang_Group.getAt(i_Int).Update_Void(); }
+
+        //Debug for boomerang level.
+        if(keyboard_Input.isDown(Phaser.KeyCode.LEFT)){
+            boomerangLevel_Int --;
+            if(boomerangLevel_Int <= 1){ boomerangLevel_Int = 1; }
+        }
+        else if(keyboard_Input.isDown(Phaser.KeyCode.RIGHT)){
+            boomerangLevel_Int ++;
+            if(boomerangLevel_Int >= 3){ boomerangLevel_Int = boomerangLevelMax_Int; }
+        }
 
     },
 

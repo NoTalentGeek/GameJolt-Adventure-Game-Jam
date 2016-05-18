@@ -12,9 +12,10 @@ var boomerangCounterMaxLevel2_Int = 25;
 var boomerangLevel_Int = 1;
 var boomerangLevelMax_Int = 3;
 var boomerangVelocityLevel1_Int = 500;
-var boomerangVelocityLevel2_Int = 700;
-var boomerangVelocityLevel3_Int = 1000;
+var boomerangVelocityLevel2_Int = 550;
+var boomerangVelocityLevel3_Int = 600;
 var mainCharacterVelocity_Int = 150;
+var Prototype24X8Bullet_Path_String = "asset/prototype/prototype image/Prototype24X8Bullet.png";
 var Prototype32X32Boomerang_Path_String = "asset/prototype/prototype image/Prototype32X32Boomerang.png";
 var Prototype32X32MainTile_Path_String = "asset/prototype/prototype image/Prototype32X32MainTile.png";
 var Prototype64X32MainCharacter_Path_String = "asset/prototype/prototype image/Prototype64X32MainCharacter.png";
@@ -223,6 +224,7 @@ var Main_State = {
     },
     preload: function(){
 
+        _Game.load.image("Prototype24X8Bullet_Image", Prototype24X8Bullet_Path_String);
         _Game.load.image("Prototype32X32Boomerang_Image", Prototype32X32Boomerang_Path_String);
         _Game.load.image("Prototype32X32MainTile_Image", Prototype32X32MainTile_Path_String);
         _Game.load.image("Prototype64X32MainCharacter_Image", Prototype64X32MainCharacter_Path_String);
